@@ -1,0 +1,9 @@
+{
+  "build": {
+    "buildCommand": "pnpm install && pnpm run build:deploy"
+  },
+  "deploy": {
+    "startCommand": "node apps/server/dist/index.js",
+    "restartPolicyType": "ON_FAILURE"
+  }
+}

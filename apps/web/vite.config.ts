@@ -8,5 +8,10 @@ export default defineConfig({
     proxy: {
       "/api": "http://localhost:4000",
     },
+    watch: {
+      usePolling: true,
+      interval: 400,
+      ignored: ["**/*.tmpdir/**", "**/*.tmp"],
+    },
   },
 });

@@ -1,0 +1,94 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum PersonCategory {
+  ELDERLY_LIVING_ALONE
+  EMPTY_NESTER
+  LEFT_BEHIND_CHILD
+  DISABLED
+  OTHER
+}
+
+enum RiskLevel {
+  HIGH
+  MID
+  LOW
+}
+
+enum PersonStatus {
+  NORMAL
+  KEY_FOCUS
+  PENDING_VISIT
+}
+
+enum VisitMethod {
+  ON_SITE
+  PHONE
+  VIDEO
+  OTHER
+}
+
+model Grid {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  bounds    Json
+  color     String
+  sortOrder Int      @default(0) @map("sort_order")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  persons Person[]
+
+  @@map("grid")
+}
+
+model Person {
+  id           String         @id @default(uuid())
+  name         String
+  gender       Gender
+  birthDate    DateTime?      @map("birth_date") @db.Date
+  category     PersonCategory
+  gridId       String         @map("grid_id")
+  phone        String?
+  guardianName String?        @map("guardian_name")
+  address      String?
+  riskLevel    RiskLevel      @default(LOW) @map("risk_level")
+  status       PersonStatus   @default(NORMAL)
+  lastVisitAt  DateTime?      @map("last_visit_at")
+  notes        String?
+  createdAt    DateTime       @default(now()) @map("created_at")
+  updatedAt    DateTime       @updatedAt @map("updated_at")
+
+  grid   Grid    @relation(fields: [gridId], references: [id])
+  visits Visit[]
+
+  @@index([gridId])
+  @@map("person")
+}
+
+model Visit {
+  id        String      @id @default(uuid())
+  personId  String      @map("person_id")
+  visitedAt DateTime    @map("visited_at")
+  method    VisitMethod
+  visitor   String
+  summary   String
+  nextStep  String?     @map("next_step")
+  createdAt DateTime    @default(now()) @map("created_at")
+
+  person Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  @@index([personId])
+  @@map("visit")
+}
