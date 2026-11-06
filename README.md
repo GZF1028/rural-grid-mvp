@@ -29,6 +29,7 @@ pnpm dev          # web:5173 / server:4000
 - [复盘](docs/04-复盘.md)
 - [演示脚本与问答](docs/05-演示脚本与问答.md)
 - [技术文档](docs/06-技术文档.md)
+- [需求规格说明书](docs/07-需求规格说明书.md)
 - [生图 Prompt 模板](assets/design/prompts.md)
 
 ## 状态
