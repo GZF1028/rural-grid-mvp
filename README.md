@@ -27,6 +27,8 @@ pnpm dev          # web:5173 / server:4000
 - [设计基准](docs/02-设计基准.md)
 - [还原自查（对比图）](docs/03-还原自查.md)
 - [复盘](docs/04-复盘.md)
+- [演示脚本与问答](docs/05-演示脚本与问答.md)
+- [技术文档](docs/06-技术文档.md)
 - [生图 Prompt 模板](assets/design/prompts.md)
 
 ## 状态
