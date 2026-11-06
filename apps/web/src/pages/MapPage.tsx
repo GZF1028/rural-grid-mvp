@@ -77,7 +77,7 @@ export function MapPage() {
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
     const map = L.map(containerRef.current, { zoomControl: false });
-    map.setView([30.683, 119.65], 15);
+    map.setView([22.718, 114.255], 15);
     L.control.zoom({ position: "bottomleft" }).addTo(map);
 
     normalTileRef.current = L.tileLayer(
@@ -424,7 +424,7 @@ export function MapPage() {
             <span className="text-2xl leading-none">⛅</span>
           </div>
           <p className="mt-2 border-t border-line pt-2 text-caption text-ink-secondary">
-            {dateStr} · 安吉·塘浦
+            {dateStr} · 深圳·龙岗
           </p>
         </div>
 
